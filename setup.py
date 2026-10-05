@@ -8,7 +8,8 @@ import sys
 # https://github.com/wichert/pybind11-example/blob/master/setup.py
 def found_lhapdf() :
     try :
-        config = subprocess.check_output(["lhapdf-config"]).decode('ascii').strip()
+        #config = subprocess.check_output(["lhapdf-config"]).decode('ascii').strip()
+        config = subprocess.check_output(["lhapdf-config", "--version"]).decode('ascii').strip()
         print("Got config:")
         print(config)
         return True
@@ -19,7 +20,8 @@ def found_lhapdf() :
 def get_lhapdf_includes() :
         
     libdir = subprocess.check_output(["lhapdf-config", "--libdir"]).decode('ascii').strip()
-    incdir = subprocess.check_output(["lhapdf-config", "--incdir"]).decode('ascii').strip()
+    #incdir = subprocess.check_output(["lhapdf-config", "--incdir"]).decode('ascii').strip()
+    incdir = subprocess.check_output(["lhapdf-config", "--prefix"]).decode('ascii').strip() + "/include"
 
     return libdir,incdir
 

@@ -32,9 +32,9 @@ class Rescaler(abc.ABC):
     def check_ref_scan(self) :
         '''Need to confirm the reference scan makes sense.
         Key items: only one value of each coupling.'''
-        if (self.reference_scan.gq == np.ndarray and len(self.reference_scan.gq) > 1) or \
-            (self.reference_scan.gdm == np.ndarray and len(self.reference_scan.gdm) > 1) or \
-            (self.reference_scan.gl == np.ndarray and len(self.reference_scan.gl) > 1) :
+        if (isinstance(self.reference_scan.gq, np.ndarray) and len(self.reference_scan.gq) > 1) or \
+            (isinstance(self.reference_scan.gdm, np.ndarray) and len(self.reference_scan.gdm) > 1) or \
+            (isinstance(self.reference_scan.gl, np.ndarray) and len(self.reference_scan.gl) > 1) :
             print("You can only have one unique value of each coupling in your reference scan!")
             exit(1)
     
@@ -259,7 +259,7 @@ class Rescaler(abc.ABC):
         target_scan = self.create_target_scan(model, target_arrays)        
         
         for this_array in target_arrays :
-            if (this_array == np.ndarray and len(this_array) > 1) :
+            if (isinstance(this_array, np.ndarray) and len(this_array) > 1) :
                 print("""Warning: the hadronic rescaling method takes a long time!
                 We don't recommend that you use it for more than one target coupling scenario.
                 Instead, try rescaling to a single target and then using the propagator scaling method

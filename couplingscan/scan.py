@@ -2,12 +2,13 @@ from dataclasses import dataclass
 from enum import Enum
 import numpy as np
 import abc
-import imp
+#import imp
+import importlib.util
 import scipy.integrate as integrate
 
 # Check if lhapdf was available at compile time. 
 try:
-    imp.find_module('lhapdfwrap')
+    importlib.util.find_spec('lhapdfwrap')
     hasLHAPDF = True
 except:
     hasLHAPDF = False
